@@ -21,7 +21,7 @@ services:
       dockerfile: Dockerfile
     env_file: ./.env
     ports:
-      - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
+      - $SPRING_LOCAL_PORT:8080
     environment:
       SPRING_APPLICATION_JSON: '{
           "spring.datasource.url"  : "jdbc:postgresql://db-clinic:$POSTGRESDB_DOCKER_PORT/$POSTGRESDB_DATABASE",
@@ -37,6 +37,15 @@ services:
       - .m2:/root/.m2
     stdin_open: true
     tty: true
+
+  frontend-clinic:
+    image: erry-az/frontend-clinic
+    env_file: ./.env
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    ports:
+      - "${FE_LOCAL_PORT}:4200"
 
 volumes:
   db-clinic-volume:
