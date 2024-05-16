@@ -20,6 +20,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin
 public class PatientController {
 
     private final PatientService patientService;
@@ -46,7 +47,7 @@ public class PatientController {
                 patientIdentity(patient.getPatientIdentity()).
                 firstName(patient.getFirstName()).
                 lastName(patient.getLastName()).
-                dateOfBirth(patient.getDateOfBirth()).
+                dateOfBirth(formatter.format(patient.getDateOfBirth())).
                 gender(patient.getGender()).
                 phoneNumber(phoneNumberUtil.format(patient.getPhoneNumber(), PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL)).
                 createdAt(patient.getCreatedAt()).

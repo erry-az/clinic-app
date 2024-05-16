@@ -38,7 +38,7 @@ public class PatientService {
 
     @Transactional
     public void register(RegisterPatientRequest request) {
-        PatientIdGenerator idGenerator = patientRepository.findTopByOrderByCreatedAtDesc().
+        PatientIdGenerator idGenerator = patientRepository.findTopByPatientIdentityIsNotNullOrderByPatientIdentityDesc().
                 map(patient -> new PatientIdGenerator(patient.getPatientIdentity())).
                 orElseGet(PatientIdGenerator::new);
 
@@ -71,10 +71,11 @@ public class PatientService {
             predicates.add(builder.equal(root.get("softDelete"), false));
 
             if(q != null && !q.isEmpty()) {
+                String qlow = q.toLowerCase();
                 predicates.add(builder.or(
-                        builder.like(root.get("firstName"), "%"+q+"%"),
-                        builder.like(root.get("lastName"), "%"+q+"%"),
-                        builder.like(root.get("patientIdentity"), "%"+q+"%")
+                        builder.like(builder.lower(root.get("firstName")), "%"+qlow+"%"),
+                        builder.like(builder.lower(root.get("lastName")), "%"+qlow+"%"),
+                        builder.like(builder.lower(root.get("patientIdentity")), "%"+qlow+"%")
                 ));
             }
 

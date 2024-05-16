@@ -28,7 +28,7 @@ public class PatientResponse {
     private String lastName;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dateOfBirth;
+    private String dateOfBirth;
 
     @Enumerated(EnumType.STRING)
     private PatientGender gender;

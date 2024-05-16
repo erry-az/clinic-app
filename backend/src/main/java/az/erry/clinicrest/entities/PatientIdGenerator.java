@@ -9,7 +9,9 @@ public class PatientIdGenerator {
 
     public PatientIdGenerator(String lastId) {
         if (lastId == null || !validateId(lastId)) {
-            throw new IllegalArgumentException("Invalid patient ID format");
+            prefix = PREFIX_START;
+            number = 0;
+            return;
         }
         prefix = lastId.charAt(0);
         number = Integer.parseInt(lastId.substring(1));

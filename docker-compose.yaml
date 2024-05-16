@@ -28,7 +28,10 @@ services:
           "spring.datasource.username" : "$POSTGRESDB_USER",
           "spring.datasource.password" : "$POSTGRESDB_ROOT_PASSWORD",
           "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.PostgreSQLDialect",
-          "spring.jpa.hibernate.ddl-auto" : "update"
+          "spring.jpa.hibernate.ddl-auto" : "update",
+          "spring.datasource.type": "com.zaxxer.hikari.HikariDataSource",
+          "spring.datasource.hikari.minimum-idle": "10",
+          "spring.datasource.hikari.maximum-pool-size": "50"
         }'
     volumes:
       - .m2:/root/.m2

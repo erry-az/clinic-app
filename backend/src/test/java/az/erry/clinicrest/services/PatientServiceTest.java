@@ -62,7 +62,7 @@ public class PatientServiceTest {
         address.setState("State");
         address.setPostcode(1234);
 
-        when(patientRepository.findTopByOrderByCreatedAtDesc()).thenReturn(Optional.empty());
+        when(patientRepository.findTopByPatientIdentityIsNotNullOrderByPatientIdentityDesc()).thenReturn(Optional.empty());
 
         patientService.register(request);
 

@@ -10,6 +10,6 @@ import java.util.UUID;
 
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, UUID>, JpaSpecificationExecutor<Patient> {
-    Optional<Patient> findTopByOrderByCreatedAtDesc();
+    Optional<Patient> findTopByPatientIdentityIsNotNullOrderByPatientIdentityDesc();
     Optional<Patient> findTopByIdAndSoftDeleteFalse(UUID id);
 }
